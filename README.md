@@ -93,8 +93,8 @@ if flask_login.current_user.is_authenticated:
         room = USERS[user][-1]
         messages = CHANNELS[room][2]
         return redirect(url_for('room', user=user,
-                                            	chatroom=room,
-                                            	messages=messages))
+                                        chatroom=room,
+                                        messages=messages))
 
     # redirect users to general menu
     return render_template("index.html", welcome='yes', name=user)
