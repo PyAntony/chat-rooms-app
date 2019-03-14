@@ -4,10 +4,10 @@ Chat application where users are free to create new channels/rooms.
 
 ## Usage
 
-- Clone repository & navigate to repository directory.
-- Run ‘pip3 install -r requirements.txt’
-- Run ‘export FLASK_APP=application.py’
-- Run ‘flask run’
+    - Clone repository & navigate to repository directory.
+    - Run ‘pip3 install -r requirements.txt’
+    - Run ‘export FLASK_APP=application.py’
+    - Run ‘flask run’
 
 ### Requirements and Description
 
@@ -16,6 +16,7 @@ Chat application where users are free to create new channels/rooms.
 -  Channel creation and list: channels (rooms) are displayed and created through GET and POST requests to the same endpoint ‘/chats’. Users can’t use already existent channel names. Channels information are stored in a Python dictionary called CHANNELS; its keys are the room names and its values are lists containing the creator name, the description of the room, and the list of messages.
 
 - Message view: up to 100 messages are displayed. Messages are stored in CHANNELS together with the user and the timestamp using the following function:
+
 '''python
 def saveMessage(msg, user, channel, CHANNELS):
     '''Saves a string including the user, timestamp, and message
