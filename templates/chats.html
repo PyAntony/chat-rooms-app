@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Rooms
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block body %}
+
+  <h3>CREATE YOUR ROOM:</h3>
+
+  {% if exists == 'y1' %}
+    <h5>Room name already exists. Try another name.</h5>
+  {% elif exists == 'y2' %}
+    <h5>Empty room name. Try again.</h5>
+  {% endif %}
+
+  <form action="{{ url_for('chats') }}" method="post">
+    <input type='text' name='room-name' id='room-name' placeholder='Room name'/>
+    <br />
+    <input type='text' name='description', size=75 id='description'
+      placeholder='Type room description here...'/>
+    <br />
+    <input type='submit' value='Create Room Now'/>
+  </form>
+
+  <br /><br />
+  <h3>ENTER ROOMS:</h3>
+  <ul>
+    {% for key in channels.keys() %}
+      <li>
+          <a href="{{ url_for('room', chatroom=key) }}">{{ key }}</a>
+            (Created by {{ channels[key][0] }})<br />
+            Description: {{ channels[key][1] }}
+            <br />
+      </li>
+    {% endfor %}
+  </ul>
+
+  <br /><br />
+  <button class="button">
+    <a href="{{ url_for('logout') }}">Change Nickname</a>
+  </button>
+  <br /><br />
+
+{% endblock %}

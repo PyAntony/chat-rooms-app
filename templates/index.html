@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Index
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block body %}
+
+  <h1>Welcome to PyChat!</h1>
+  <h3>Supporting open source communities since 1998</h3>
+  <img src="{{ url_for('static', filename="images/indexpic.jpg")}}"
+    alt="indexpic" style="width:40%">
+  <br /><br /><br />
+
+  {% if welcome == 'no'%}
+
+    {% if name %}
+      <h5>{{ name }}</h5><!-- Displays 'Nickname exits' message. -->
+    {% else %}
+      <h3>Enter a new nickname:</h3>
+    {% endif %}
+
+    <form action="{{ url_for('index') }}" method="post">
+      <input type='text' name='nickname' id='nickname' placeholder='nickname'/>
+      <input type='submit' value='Start Chat Now'/>
+    </form>
+
+  {% elif welcome == 'yes' %}
+
+    <h3>Welcome {{ name }}!</h3>
+    <button class="button-welcome">
+      <a href="{{ url_for('chats') }}">Start Chat Now</a>
+    </button>
+    <button class="button-welcome">
+      <a href="{{ url_for('logout') }}">Change Nickname</a>
+    </button>
+
+  {% endif %}
+
+{% endblock %}

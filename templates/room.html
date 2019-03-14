@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js">
+  </script>
+
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+</head>
+
+<body>
+  <!-- Variables from server to JavaScript -->
+  <div style="display:none">
+    <span id=room>{{ room }}</span>
+    <span id=user>{{ user }}</span>
+  </div>
+
+  <script type="text/javascript" room=room user=user>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      let room = document.getElementById("room").textContent;
+      let user = document.getElementById("user").textContent;
+
+      var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+      socket.on('connect', () => {
+
+          // emit joining message
+          socket.emit('join', {'username': user, 'room': room});
+
+          // prepare button to submit messages
+          document.querySelector('#msgForm').onsubmit = () => {
+            let msg = document.querySelector('#myMessage').value;
+            socket.emit('message', {'msg': msg, 'room': room});
+          };
+
+          // prepare buttons to leave room
+          document.querySelectorAll('button').forEach(button  => {
+              button.onclick = () => {
+                  socket.emit('leave', {'username': user, 'room': room});
+              };
+          });
+      });
+
+      // append new message to list of messages when received
+      socket.on('receiveMessage', msg => {
+          var node = document.createElement("li");
+          node.innerHTML = msg;
+          document.querySelector('#messagesList').appendChild(node);
+      });
+
+    });
+  </script>
+
+  <br />
+  <div class="container">
+
+    <h2>ROOM: {{ room }}</h2>
+
+    <ul id="messagesList" style="list-style-type:none; padding-left: 0">
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+
+    <br /><br />
+    <form id='msgForm'>
+      <textarea rows="3" cols="50" id="myMessage" placeholder='Type here'></textarea>
+      <br />
+      <input type='submit' value='Send Message' id='sendButton'/>
+    </form>
+
+    <br /><br />
+    <h4>Leave room and:</h4>
+    <button class="buttonl">
+      <a href="{{ url_for('logout') }}">Change Nickname</a>
+    </button>
+    <button class="buttonl">
+      <a href="{{ url_for('chats') }}">Go back to Channels</a>
+    </button>
+    <br /><br />
+
+  </div>
+
+</body>
+
+</html>
