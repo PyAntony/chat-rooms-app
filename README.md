@@ -1,4 +1,4 @@
-# Project 2 – Flask-SocketIO & JavaScript (Chat application)
+# Project 2 – Flask-SocketIO-JavaScript (Chat application)
 
 Chat application where users are free to create new channels/rooms.
 
@@ -16,8 +16,7 @@ Chat application where users are free to create new channels/rooms.
 -  Channel creation and list: channels (rooms) are displayed and created through GET and POST requests to the same endpoint ‘/chats’. Users can’t use already existent channel names. Channels information are stored in a Python dictionary called CHANNELS; its keys are the room names and its values are lists containing the creator name, the description of the room, and the list of messages.
 
 - Message view: up to 100 messages are displayed. Messages are stored in CHANNELS together with the user and the timestamp using the following function:
-
-'''python
+```python
 def saveMessage(msg, user, channel, CHANNELS):
     '''Saves a string including the user, timestamp, and message
     to corresponding channel list of messages (message history).
@@ -39,7 +38,7 @@ def saveMessage(msg, user, channel, CHANNELS):
         pickle.dump(CHANNELS, ifile)
 
     return msg_str
-'''
+```
 
 - Sending messages: messages are received and displayed without refreshing the web page. Alerts are also displayed when users enter or leave the room. This is accomplished mainly using the classical Flask-SocketIO-JavaScript scheme but also through the storage of messages and room visits. A user joins the room when entering, but doesn’t leave the room until he actually clicks on a button to either go back to the list of channels or change the nickname; this is when the room name is removed from his/her list of visits. The following example shows the interaction a user “antony” (on chrome) on the left and “Fred” (on chromium) on the right. The next image shows Fred clicking the “Change Nickname” button and leaving the room.
 
@@ -50,13 +49,13 @@ def saveMessage(msg, user, channel, CHANNELS):
 <br /><br />
 
 Messages are lively displayed by first showing the history of messages (in ‘room.html’):
-'''html
+```html
 <ul id="messagesList" style="list-style-type:none; padding-left: 0">
       {% for msg in messages %}
         <li>{{ msg }}</li>
       {% endfor %}
 </ul>
-‘’’
+```
 
 And then appending new ‘li’ tags once a message is received from the socket:
 ‘’’javascript
