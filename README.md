@@ -5,9 +5,9 @@ Chat application where users are free to create new channels/rooms.
 ## Usage
 
     - Clone repository & navigate to repository directory.
-    - Run ‘pip3 install -r requirements.txt’
-    - Run ‘export FLASK_APP=application.py’
-    - Run ‘flask run’
+    - Run "pip3 install -r requirements.txt"
+    - Run "export FLASK_APP=application.py"
+    - Run "flask run"
 
 ### Requirements and Description
 
