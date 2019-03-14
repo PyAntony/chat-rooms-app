@@ -11,9 +11,9 @@ Chat application where users are free to create new channels/rooms.
 
 ### Requirements and Description
 
-- Display name: accomplished using Flask-Login. Once the user logs in (creates a new nickname) a cookie is created and the user is remembered until logged out. User can be logged out if he changes his nickname or the cookie expires (1 year by default; time can be changed). A logged in user is said to be “authenticated” and can navigate protected URLs. In this case there is no password required, only the creation of a non-existent nickname. Users are stored in a Python dictionary named USERS; it’s keys are the users and its values are lists where the name of the rooms visited are stored.
+**- Display name:** accomplished using Flask-Login. Once the user logs in (creates a new nickname) a cookie is created and the user is remembered until logged out. User can be logged out if he changes his nickname or the cookie expires (1 year by default; time can be changed). A logged in user is said to be “authenticated” and can navigate protected URLs. In this case there is no password required, only the creation of a non-existent nickname. Users are stored in a Python dictionary named USERS; it’s keys are the users and its values are lists where the name of the rooms visited are stored.
 
--  Channel creation and list: channels (rooms) are displayed and created through GET and POST requests to the same endpoint ‘/chats’. Users can’t use already existent channel names. Channels information are stored in a Python dictionary called CHANNELS; its keys are the room names and its values are lists containing the creator name, the description of the room, and the list of messages.
+**-  Channel creation and list:** channels (rooms) are displayed and created through GET and POST requests to the same endpoint ‘/chats’. Users can’t use already existent channel names. Channels information are stored in a Python dictionary called CHANNELS; its keys are the room names and its values are lists containing the creator name, the description of the room, and the list of messages.
 
 - Message view: up to 100 messages are displayed. Messages are stored in CHANNELS together with the user and the timestamp using the following function:
 ```python
